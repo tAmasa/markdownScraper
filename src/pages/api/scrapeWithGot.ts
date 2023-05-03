@@ -1,11 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cheerio from 'cheerio';
 import { gotScraping } from 'got-scraping';
+import { scrapeYoutube } from './youtubeScraper';
+
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { url } = req.query;
 
   try {
+
+    if (isYoutubeURL(url as string)) {
+      console.log("foo");
+    const scrapedData = await scrapeYoutube(url as string);
+    console.log('Scraped YouTube data:', scrapedData); // Added console log
+    res.status(200).json({ data: scrapedData });
+    return;
+  }
+
     const response = await gotScraping(url as string);
     const html = response.body;
     const $ = cheerio.load(html);
@@ -76,3 +87,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(500).json({ error: 'Data was unable to be fetched.' });
   }
 };
+
+function isYoutubeURL(url: string): boolean {
+  const regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/;
+  return regex.test(url);
+}

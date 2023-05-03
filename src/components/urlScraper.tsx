@@ -28,6 +28,8 @@ const UrlScraper = () => {
 
   return (
     <div className="prose container mx-auto flex flex-col items-center justify-center">
+            <h1 className="text-4xl font-bold mb-4">Webscraper Demo 🔦🐞</h1>
+
       <form onSubmit={handleSubmit} className="flex items-center justify-center">
         <label htmlFor="url" className="sr-only">
           URL
