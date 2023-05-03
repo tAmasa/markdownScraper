@@ -6,7 +6,7 @@ import { Dialog, Transition } from '@headlessui/react';
 const UrlScraper = () => {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
-  const [markdown, setMarkdown] = useState('### Hello World\n## *Hi*'); 
+  const [markdown, setMarkdown] = useState(''); 
   const [showError, setShowError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
