@@ -14,7 +14,7 @@ const UrlScraper = () => {
     setLoading(true);
   
     try {
-      const response = await axios.get(`/api/scrape?url=${encodeURIComponent(url)}`);
+      const response = await axios.get(`/api/scrapeWithGot?url=${encodeURIComponent(url)}`);
       const articleText = response.data.data;
       console.log('Markdown:', articleText); 
       setMarkdown(articleText);

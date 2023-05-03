@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
 import cheerio from 'cheerio';
+import { gotScraping } from 'got-scraping';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { url } = req.query;
 
   try {
-    const response = await axios.get(url as string);
-    const html = response.data;
+    const response = await gotScraping(url as string);
+    const html = response.body;
     const $ = cheerio.load(html);
     let articleText = '';
 
